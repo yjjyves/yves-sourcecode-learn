@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	    <property name="locations" value="classpath:application.properties"/>
+	</bean>
+
+	<bean id="combatService" class="com.yves.spring.service.CombatService" >
+		<constructor-arg value="60" />
+	</bean>
+	
+	<alias name="combatService" alias="combat"/>
+
+	<bean id="exampleBean" name="name1, name2, name3" class="com.yves.spring.service.CBean"
+		  scope="singleton" init-method="init" destroy-method="cleanup">
+
+		<!-- 可以用下面三种形式指定构造参数 -->
+		<constructor-arg type="int" value="7500000"/>
+
+		<!-- property 的几种情况 -->
+		<!--<property name="cService">
+			<ref bean="combatService"/>
+		</property>-->
+
+	</bean>
+</beans>
+	
+	
+	
