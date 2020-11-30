@@ -7,7 +7,11 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 	
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	    <property name="locations" value="classpath:application.properties"/>
+	</bean>-->
+
+	<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
 	    <property name="locations" value="classpath:application.properties"/>
 	</bean>
 
@@ -21,12 +25,12 @@
 		  scope="singleton" init-method="init" destroy-method="cleanup">
 
 		<!-- 可以用下面三种形式指定构造参数 -->
-		<constructor-arg type="int" value="7500000"/>
+		<!--<constructor-arg type="int" value="7500000"/>-->
 
-		<!-- property 的几种情况 -->
-		<!--<property name="cService">
+		<!-- property cService -->
+		<property name="cService">
 			<ref bean="combatService"/>
-		</property>-->
+		</property>
 
 	</bean>
 </beans>

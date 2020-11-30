@@ -1,6 +1,7 @@
 package com.yves.spring;
 
 import com.yves.spring.service.Abean;
+import com.yves.spring.service.CBean;
 import com.yves.spring.service.CombatService;
 import com.yves.spring.service.EBean;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
@@ -48,6 +49,8 @@ public class IOCTest {
         cs2.combating();*/
         Abean ab = context3.getBean(Abean.class);
         ab.doSomething();
+
+        CBean cBean = context3.getBean(CBean.class);
 
         EBean eBean = context3.getBean(EBean.class);
         eBean.doSomething();

@@ -1,5 +1,10 @@
 package com.yves.spring.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+
+import javax.annotation.Resource;
+
 public class CBean {
     private int years;
 
@@ -7,10 +12,21 @@ public class CBean {
 
     private CombatService cService;
 
+    @Resource
     private Abean aabean;
+
+    @Value("${value}")
+    private int value;
+    public CBean() {
+    }
 
     public CBean(int years) {
         this.years = years;
+    }
+
+    public CBean(@Value("${years}") int years, Abean aabean) {
+        this.years = years;
+        this.aabean = aabean;
     }
 
     public void init() {
@@ -19,5 +35,9 @@ public class CBean {
 
     public void cleanup() {
 
+    }
+
+    public void setcService(CombatService cService) {
+        this.cService = cService;
     }
 }
