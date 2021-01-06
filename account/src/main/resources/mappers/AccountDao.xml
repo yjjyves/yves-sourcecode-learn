@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yves.dao.AccountDao">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.yves.model.Account">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="money" property="money" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        id,
+        user_id,
+        money
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="account.id">
+        INSERT INTO account (
+            id,
+            user_id,
+            money
+        ) VALUES (
+            #{account.id,jdbcType=INTEGER},
+            #{account.userId,jdbcType=VARCHAR},
+            #{account.money,jdbcType=INTEGER}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="account.id">
+        INSERT INTO account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="account.id!=null"> id,</if>
+            <if test="account.userId!=null"> user_id,</if>
+            <if test="account.money!=null"> money,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="account.id!=null">#{account.id,jdbcType=INTEGER},
+            </if>
+            <if test="account.userId!=null">#{account.userId,jdbcType=VARCHAR},
+            </if>
+            <if test="account.money!=null">#{account.money,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO account (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="accounts" item="account" index="index" separator=",">
+            (
+            #{account.id,jdbcType=INTEGER},
+            #{account.userId,jdbcType=VARCHAR},
+            #{account.money,jdbcType=INTEGER}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE account
+        <set>
+            <if test="account.id != null"> id= #{account.id,jdbcType=INTEGER},</if>
+            <if test="account.userId != null"> user_id= #{account.userId,jdbcType=VARCHAR},</if>
+            <if test="account.money != null"> money= #{account.money,jdbcType=INTEGER}</if>
+        </set>
+        WHERE id = #{account.id,jdbcType=INTEGER}
+    </update>
+
+    <select id="getByUserId" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from account
+        <where>
+            user_id= #{userId,jdbcType=VARCHAR}
+        </where>
+    </select>
+</mapper>
+

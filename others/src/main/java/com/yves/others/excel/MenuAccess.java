@@ -28,4 +28,7 @@ public class MenuAccess {
 
     @Excel(name = "菜单", orderNum = "7", width = 30)
     private String menuName;
+
+    @Excel(name = "权限项", orderNum = "0", width = 30)
+    private String accessKeyValue;
 }

@@ -1,0 +1,61 @@
+server:
+  port: 12345
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  application:
+    name: yves-others
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      url: jdbc:mysql://172.24.27.114:3306/xl_smarthome_seata?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+      username: root
+      password: cloud_2020
+      # 初始连接数
+      initial-size: 10
+      # 最大连接池数量
+      max-active: 1000
+      # 最小连接池数量
+      min-idle: 10
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /monitor/druid/*
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 100000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.24.27.114:8848
+        #server-addr: 192.168.1.4:8848
+        group: local114
+        password: nacos
+        username: nacos
+
+logging:
+  config: classpath:log4j2.xml

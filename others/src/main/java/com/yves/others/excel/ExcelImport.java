@@ -48,24 +48,25 @@ public class ExcelImport {
                         continue;
                     }
                     //按钮
-                    String buttonName = menuAccess.getButtonName();
+                    String buttonName = menuAccess.getButtonName() + "-" + (menuAccess.getInterfaceName() == null ? menuAccess.getRemark() : menuAccess.getInterfaceName());
                     String buttonValue = menuAccess.getFirstIdentifier() + ":" + menuAccess.getTwoIdentifier();
                     if (!buttonMap.containsKey(buttonValue)) {
                         StringBuilder stringBuilder2 = new StringBuilder("insert into sys_button(button_id,button_name, button_value,create_user) values(" + buttonMaxId + ",\"" +
                                 buttonName + "\",\"" +
                                 buttonValue + "\",\"1\");");
-                        System.err.println(stringBuilder2.toString());
+                        //System.err.println(stringBuilder2.toString());
                         buttonMap.put(buttonValue, buttonMaxId);
                     }
 
                     //权限项
-                    String accessName = menuAccess.getInterfaceName() == null ? buttonName : menuAccess.getInterfaceName();
-                    String accessValue = getAccessValue(menuAccess.getInterfaceUrl()) + ":" + menuAccess.getFirstIdentifier();
+                    String accessName = buttonName;
+                    String method = menuAccess.getMethod().toUpperCase();
+                    String accessValue = getAccessValue(menuAccess.getInterfaceUrl()) + ":" + (menuAccess.getAccessKeyValue() == null ? getAccessValueKey(menuAccess.getInterfaceUrl()) : menuAccess.getAccessKeyValue());
                     if (!accessMap.containsKey(accessValue)) {
-                        StringBuilder stringBuilder1 = new StringBuilder("insert into sys_right_access(access_id,access_name, access_url, access_value,create_user) values(" + accessMaxId + ",\"" +
+                        StringBuilder stringBuilder1 = new StringBuilder("insert into sys_right_access(access_id,access_name, access_url, access_value,request_method,create_user) values(" + accessMaxId + ",\"" +
                                 accessName + "\",\"" +
                                 "/paas-business" + menuAccess.getInterfaceUrl() + "\",\"" +
-                                accessValue + "\",\"1\");");
+                                accessValue + "\",\"" + method + "\",\"1\");");
                         System.err.println(stringBuilder1.toString());
                         accessMap.put(accessValue, accessMaxId);
                     }
@@ -74,7 +75,7 @@ public class ExcelImport {
                     if (!buttonAccessMap.containsKey(buttonValue + accessValue)) {
                         StringBuilder stringBuilder3 = new StringBuilder("insert into sys_button_menu_access(button_id,access_id, create_user) values(" + buttonMap.get(buttonValue) + "," +
                                 accessMap.get(accessValue) + ",1);");
-                        System.err.println(stringBuilder3.toString());
+                        //System.err.println(stringBuilder3.toString());
                         buttonMap.put(buttonValue + accessValue, accessMaxId);
                     }
 
@@ -83,7 +84,7 @@ public class ExcelImport {
                     if (menuId != null && !menuButtonMap.containsKey(menuId + buttonValue) && menuId != null) {
                         StringBuilder stringBuilder4 = new StringBuilder("insert into sys_menu_button(button_id,menu_id, create_user) values(" + buttonMap.get(buttonValue) + "," +
                                 menuId + ",1);");
-                        System.err.println(stringBuilder4.toString());
+                        //System.err.println(stringBuilder4.toString());
                         menuButtonMap.put(menuId + buttonValue, true);
                     }
 
@@ -98,17 +99,28 @@ public class ExcelImport {
     }
 
     public static void main(String[] args) {
-        String url = "/v1/logDeviceList";
+        String url = "/dataAnalysis/timer/timerLogList";
         System.err.println("getAccessValue " + getAccessValue(url));
 
-        String url2 = "v1/productManage/product/add\n";
-        System.err.println("getAccessValue2 " + getAccessValue(url2));
+        String url2 = "v1/productManage/product/add";
+        System.err.println("getAccessValue2 " + getAccessValueKey(url2));
     }
 
     private static String getAccessValue(String interfaceUrl) {
         String url = interfaceUrl.replace("/v1/", "").replace("v1/", "");
+        if (url.startsWith("/")) {
+            url = url.replaceFirst("/", "");
+        }
         int index = url.indexOf("/");
 
         return url.substring(0, (index == -1) ? url.length() - 1 : index);
+    }
+
+
+    private static String getAccessValueKey(String interfaceUrl) {
+        String url = interfaceUrl.replace("/v1/", "").replace("v1/", "");
+        int index = url.lastIndexOf("/");
+
+        return index < 0 ? url : url.substring(index + 1);
     }
 }
