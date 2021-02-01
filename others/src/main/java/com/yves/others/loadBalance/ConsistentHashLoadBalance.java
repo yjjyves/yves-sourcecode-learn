@@ -1,7 +1,5 @@
 package com.yves.others.loadBalance;
 
-import com.alibaba.dubbo.rpc.support.RpcUtils;
-
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -11,6 +9,29 @@ import java.util.concurrent.ConcurrentMap;
 public class ConsistentHashLoadBalance {
 
     private final ConcurrentMap<String, ConsistentHashSelector> selectors = new ConcurrentHashMap<>();
+
+
+    public static void main(String[] args) {
+        /*List<Invoker> invokers = new ArrayList<>();
+        Invoker invoker = new Invoker("A");
+        Invoker invoker2 = new Invoker("B");
+        Invoker invoker3 = new Invoker("C");
+        invokers.add(invoker);
+        invokers.add(invoker2);
+        invokers.add(invoker3);
+
+        Invoker targetInvoker = new ConsistentHashLoadBalance().doSelect(invokers, "");
+        System.err.println(" " + targetInvoker.getIp());*/
+
+        TreeMap treeMap = new TreeMap();
+        treeMap.put(0,"A");
+        treeMap.put(1,"B");
+        treeMap.put(4,"D");
+        treeMap.put(2,"C");
+        treeMap.put(5,"E");
+
+        System.err.println(treeMap.tailMap(3).firstKey());
+    }
 
     protected Invoker doSelect(List<Invoker> invokers, String arg) {
         //String methodName = RpcUtils.getMethodName(invocation);
@@ -64,7 +85,7 @@ public class ConsistentHashLoadBalance {
                         // h = 0 时，取 digest 中下标为 0 ~ 3 的4个字节进行位运算
                         // h = 1 时，取 digest 中下标为 4 ~ 7 的4个字节进行位运算
                         // h = 2, h = 3 时过程同上
-                        long m = getHash(newAddressHash + "");
+                        long m = getHash(newAddressHash + "" + h);
                         // 将 hash 到 invoker 的映射关系存储到 virtualInvokers 中，
                         // virtualInvokers 需要提供高效的查询操作，因此选用 TreeMap 作为存储结构
                         virtualInvokers.put(m, invoker);

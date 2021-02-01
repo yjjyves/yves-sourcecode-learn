@@ -11,8 +11,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@EnableAspectJAutoProxy
+@EnableTransactionManagement(proxyTargetClass = true)
 public class IOCTest {
 
 

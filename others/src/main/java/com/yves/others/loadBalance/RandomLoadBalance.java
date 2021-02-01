@@ -23,7 +23,6 @@ public class RandomLoadBalance {
         invokers.add(invoker2);
         invokers.add(invoker3);
 
-
         for (int i = 0; i < 10; i++) {
             Invoker selectInvoker = doSelect(invokers);
             System.err.println(selectInvoker.getIp());
