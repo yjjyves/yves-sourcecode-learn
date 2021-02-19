@@ -17,6 +17,10 @@ public class CBean {
 
     @Value("${value}")
     private int value;
+
+    @Value("${spring.datasource.driverClassName}")
+    private String driverClassName;
+
     public CBean() {
     }
 
@@ -39,5 +43,9 @@ public class CBean {
 
     public void setcService(CombatService cService) {
         this.cService = cService;
+    }
+
+    public String getDriverClassName() {
+        return driverClassName;
     }
 }
