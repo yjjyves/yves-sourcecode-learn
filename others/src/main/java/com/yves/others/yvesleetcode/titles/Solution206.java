@@ -1,6 +1,6 @@
 package com.yves.others.yvesleetcode.titles;
 
-import com.yves.yvesleetcode.base.ListNode;
+import com.yves.others.yvesleetcode.base.ListNode;
 
 /**
  * 反转链表

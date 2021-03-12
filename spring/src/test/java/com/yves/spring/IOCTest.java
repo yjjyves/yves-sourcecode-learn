@@ -21,10 +21,10 @@ public class IOCTest {
 
     public static void main(String[] args) {
 
-       /* ApplicationContext context = new ClassPathXmlApplicationContext("applicationTest.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationTest.xml");
         CombatService cs = context.getBean(CombatService.class);
         cs.doInit();
-        cs.combating();*/
+        cs.combating();
 
         /*ApplicationContext context1 = new FileSystemXmlApplicationContext("e:/study/applicationTest.xml");
         cs = context1.getBean(CombatService.class);
@@ -37,10 +37,9 @@ public class IOCTest {
         cs.combating();*/
 
         // 注解的方式
-       /* ApplicationContext context2 = new AnnotationConfigApplicationContext(IOCTest.class);
+        ApplicationContext context2 = new AnnotationConfigApplicationContext(IOCTest.class);
         CombatService cs2 = context2.getBean(CombatService.class);
         cs2.combating();
-*/
 
         System.out.println("------------------------------------------------------");
         GenericApplicationContext context3 = new GenericApplicationContext();

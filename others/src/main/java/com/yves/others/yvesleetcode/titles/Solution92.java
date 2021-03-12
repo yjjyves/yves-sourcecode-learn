@@ -1,7 +1,7 @@
 package com.yves.others.yvesleetcode.titles;
 
 import com.alibaba.fastjson.JSONObject;
-import com.yves.yvesleetcode.base.ListNode;
+import com.yves.others.yvesleetcode.base.ListNode;
 
 /**
  * 反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。

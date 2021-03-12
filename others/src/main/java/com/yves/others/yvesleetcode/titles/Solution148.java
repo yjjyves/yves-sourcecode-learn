@@ -1,7 +1,8 @@
 package com.yves.others.yvesleetcode.titles;
 
 import com.alibaba.fastjson.JSONObject;
-import com.yves.yvesleetcode.base.ListNode;
+import com.yves.others.yvesleetcode.base.ListNode;
+import com.yves.others.yvesleetcode.base.ListNode;
 
 /**
  * 在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。

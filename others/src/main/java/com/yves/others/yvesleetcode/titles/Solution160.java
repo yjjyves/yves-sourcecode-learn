@@ -1,7 +1,7 @@
 package com.yves.others.yvesleetcode.titles;
 
 import com.alibaba.fastjson.JSONObject;
-import com.yves.yvesleetcode.base.ListNode;
+import com.yves.others.yvesleetcode.base.ListNode;
 
 /**
  * 编写一个程序，找到两个单链表相交的起始节点。

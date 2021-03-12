@@ -22,7 +22,7 @@ public class AbstractQueuedSynchronizer extends AbstractOwnableSynchronizer impl
         //前节点
         volatile Node prev;
 
-        //前节点
+        //后节点
         volatile Node next;
 
         //等待的线程

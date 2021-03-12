@@ -86,9 +86,10 @@ public class ReentrantLock implements Lock, java.io.Serializable {
     }
 
 
-    //非公平锁
+    //非公平锁 老的线程排队使用锁，新线程仍然抢占使用锁。
     static final class NonfairSync extends Sync {
         final void lock() {
+            // 新的线程可能抢占已经排队的线程的锁的使用权
             if (compareAndSetState(0, 1)) {
                 setExclusiveOwnerThread(Thread.currentThread());
             } else {
@@ -104,6 +105,7 @@ public class ReentrantLock implements Lock, java.io.Serializable {
 
     }
 
+    //公平锁 先到先得,如果未获取到锁,构造Node addWaiter加到等待队列,等待顺序唤醒
     static final class FairSync extends Sync {
         @Override
         void lock() {
@@ -114,6 +116,7 @@ public class ReentrantLock implements Lock, java.io.Serializable {
             final Thread current = Thread.currentThread();
             int c = getState();
             if (c == 0) {
+                //当前线程未入队!hasQueuedPredecessors()保证了不论是新的线程还是已经排队的线程都顺序使用锁
                 if (!hasQueuedPredecessors() &&
                         compareAndSetState(0, acquires)) {
                     setExclusiveOwnerThread(current);

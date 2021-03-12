@@ -1,6 +1,6 @@
 package com.yves.others.mvc.handler;
 
-import com.yves.mvc.annotation.RequestMappingInfo;
+import com.yves.others.mvc.annotation.RequestMappingInfo;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
