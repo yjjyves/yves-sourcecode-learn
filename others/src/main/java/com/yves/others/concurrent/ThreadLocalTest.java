@@ -19,6 +19,7 @@ public class ThreadLocalTest {
         System.err.println(threadLocal.get());
 
         InheritableThreadLocal threadLocal = new InheritableThreadLocal();
+        threadLocal.set(1);
         threadLocal.get();
 
 

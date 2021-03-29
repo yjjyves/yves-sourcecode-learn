@@ -376,7 +376,7 @@ public class AbstractQueuedSynchronizer extends AbstractOwnableSynchronizer impl
          */
         private Node addConditionWaiter() {
             Node t = lastWaiter;
-            // 如果lastWaiter取消了 ,则遍历链表清楚出去
+            // 如果lastWaiter取消了 ,则遍历链表清除出去
             if (t != null && t.waitStatus != Node.CONDITION) {
                 unlinkCancelledWaiters();
                 t = lastWaiter;
