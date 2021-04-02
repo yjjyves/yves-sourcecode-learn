@@ -340,7 +340,7 @@ public class AbstractQueuedSynchronizer extends AbstractOwnableSynchronizer impl
             //是否是在同步队列去获取锁,如果不是则等待
             while (!isOnSyncQueue(node)) {
                 LockSupport.park(this);
-                //如果当前节点没有中断 则跳出等待
+                //如果当前节点没有中断 则跳出等待SynchronizedMap
                 if ((interruptMode = checkInterruptWhileWaiting(node)) != 0)
                     break;
             }
